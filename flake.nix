@@ -12,7 +12,7 @@
 
 
   outputs = { nixpkgs, ... }@inputs: {
-    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.codebook = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
           ./hosts/codebook/configuration.nix
