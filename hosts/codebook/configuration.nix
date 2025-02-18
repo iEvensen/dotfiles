@@ -80,6 +80,7 @@
     curl
     git
     lf
+    path-of-building
   ];
 
 
