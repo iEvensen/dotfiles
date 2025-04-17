@@ -1,48 +1,45 @@
-{
-  config,
-  inputs,
-  lib,
-  pkgs,
-  ...
+{ config
+, inputs
+, pkgs
+, lib
+, ...
 }: {
   imports = [
-
-    ];
-  # Network Configuration
-  networking = {
-    networkmanager.enable = true;
-    firewall.enable = false;
-  };
-  # NisOS Flake and nix Configuration
+    ./hardware
+    ./programs
+    ./services
+  ];
+  # NixOS enable Flakes
   nix = {
+    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = "nix-command flakes";
       auto-optimise-store = true;
-      trusted-users = ["root" "idev" "@wheel"];
     };
     gc = {
       automatic = true;
-      dates = "daily";
+      dates = "weekly";
       options = "--delete-older-than 10d";
+    };
+    settings.trusted-users = [ "root" "ievensen" "@wheel" ];
+    optimise = {
+      automatic = true;
+      dates = [ "weekly" ];
     };
   };
 
-  security = {
-    rtkit.enable = true;
-  };
-  # Set your time zone.
   time.timeZone = "Europe/Oslo";
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.supportedLocales = [
+    "en_US.UTF-8/UTF-8"
+  ];
 
-  system = {
-    stateVersion = "24.11";
-    autoUpgrade = {
-      enable = true;
-      dates = "weekly";
-      };
+  console.useXkbConfig = true;
+  programs.fuse.userAllowOther = true;
+
+  users = {
+    defaultUserShell = pkgs.fish;
+    mutableUsers = false;
+    users.root.initialHashedPassword = "";
   };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 }
