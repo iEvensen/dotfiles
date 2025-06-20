@@ -81,7 +81,7 @@
     git
     lf
     path-of-building
-    parsec
+    parsec-bin
   ];
 
 
