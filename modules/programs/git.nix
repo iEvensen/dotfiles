@@ -81,16 +81,16 @@ in
         "*.mill-version" # used by metals
         "*.jvmopts" # should be local to every project
       ];
-      userEmail = "gako.footwork856@passinbox.com";
-      userName = "merrinx";
+      userEmail = "idar.evensen@gmail.com";
+      userName = "ievensen";
 
       includes = [
         {
           condition = "gitdir:~/Projects/workspace/";
           contents = {
             user = {
-              name = "Knut Oien";
-              email = "knut.andre.gulseth.oien@hnikt.no";
+              name = "Idar Evensen";
+              email = "Idar.Evensen@hnikt.no";
             };
           };
         }
@@ -98,8 +98,8 @@ in
           condition = "hasconfig:remote.*.url:ssh://git@github.com:HNIKT-Tjenesteutvikling-Systemutvikling/**";
           contents = {
             user = {
-              name = "Knut Oien";
-              email = "knut.andre.gulseth.oien@hnikt.no";
+              name = "Idar Evensen";
+              email = "idar.evensen@hnikt.no";
             };
           };
         }
