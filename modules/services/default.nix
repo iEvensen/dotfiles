@@ -6,7 +6,12 @@ let
   };
 in
 [
+  ./dconf.nix
+  ./gpg.nix
+  ./hypridle.nix
+  ./hyprpaper.nix
+  ./mako.nix
+  ./network.nix
   ./persist.nix
-  ./privacy.nix
   more
 ]

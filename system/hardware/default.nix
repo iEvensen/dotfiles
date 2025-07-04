@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
+{ config
+, pkgs
+, lib
+, ...
+}:
 let
-
   cleanup = ''
     mkdir -p /btrfs_tmp
     echo "[cleanup] Created /btrfs_tmp"
@@ -40,9 +43,13 @@ let
 in
 {
   imports = [
+    ./bluetooth.nix
+    ./ckb-next.nix
     ./disko.nix
     ./graphics.nix
+    ./locale.nix
     ./network.nix
+    ./nix.nix
   ];
   boot = {
     consoleLogLevel = 3;
@@ -92,5 +99,11 @@ in
     hostPlatform = lib.mkDefault "x86_64-linux";
   };
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
+
+  users = {
+    defaultUserShell = pkgs.fish;
+    mutableUsers = false;
+    users.root.initialHashedPassword = "$7$CU..../....xM/ghsj5uVLcgAidGzKgs1$JJX8YwDoTnFXMJNaWX/n5m9jPVKeTisZVYlefd5jlL0";
+  };
 }

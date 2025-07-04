@@ -1,6 +1,6 @@
-{ ... }:
+_:
 let
-  username = "merrinx";
+  username = "ievensen";
   homeDirectory = "/home/${username}";
   configHome = "${homeDirectory}/.config";
 in
@@ -11,6 +11,7 @@ in
   };
   imports = builtins.concatMap import [
     ./programs
+    ./scripts
     ./services
     ./themes
   ];
@@ -19,16 +20,9 @@ in
     enable = true;
   };
 
-  dconf.settings = {
-    "org/virt-manager/virt-manager/connections" = {
-      autoconnect = [ "qemu:///system" ];
-      uris = [ "qemu:///system" ];
-    };
-  };
-
   home = {
     inherit username homeDirectory;
-    stateVersion = "24.11";
+    stateVersion = "25.05";
   };
 
   systemd.user.startServices = "sd-switch";
