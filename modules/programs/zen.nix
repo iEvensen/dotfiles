@@ -1,6 +1,8 @@
-{ inputs
+{ osConfig
+, inputs
 , config
 , pkgs
+, lib
 , ...
 }:
 let
@@ -16,7 +18,7 @@ let
   };
 in
 {
-  home = {
+  home = lib.mkIf osConfig.environment.desktop.enable {
     packages = [ zenWithWayland ];
     persistence."/persist/${config.home.homeDirectory}" = {
       directories = [

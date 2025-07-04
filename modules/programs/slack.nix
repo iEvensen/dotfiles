@@ -1,6 +1,14 @@
-{ pkgs, config, ... }:
+{ osConfig
+, config
+, pkgs
+, lib
+, ...
+}:
+let
+  inherit (osConfig.environment) desktop;
+in
 {
-  home = {
+  home = lib.mkIf (desktop.enable && desktop.develop) {
     packages = [
       pkgs.slack
     ];
