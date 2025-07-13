@@ -104,6 +104,6 @@ in
   users = {
     defaultUserShell = pkgs.fish;
     mutableUsers = false;
-    users.root.initialHashedPassword = "$7$CU..../....xM/ghsj5uVLcgAidGzKgs1$JJX8YwDoTnFXMJNaWX/n5m9jPVKeTisZVYlefd5jlL0";
+    users.root.initialHashedPassword = "$7$CU..../....w0X1o8Pvt3FYDLO7PAGmD.$xmVRVe4EziFuc7961.Kr/Z6tCfCNhGSbj/ZxdTG.r04";
   };
 }
