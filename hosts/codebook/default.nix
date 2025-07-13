@@ -7,7 +7,7 @@
   users.users = {
     ievensen = {
       isNormalUser = true;
-      initialHashedPassword = "$7$CU..../....re.hRJT/dAI5QtAnjQ2or/$nY1JgY1nvyNKZKGsFHnpCJUs9ABZEP5HqbQs04Vqmx4";
+      initialHashedPassword = "$7$CU..../....w0X1o8Pvt3FYDLO7PAGmD.$xmVRVe4EziFuc7961.Kr/Z6tCfCNhGSbj/ZxdTG.r04";
       openssh.authorizedKeys.keys = [
       ];
       extraGroups = [
