@@ -1,4 +1,6 @@
-{ pkgs, ... }:
+{ pkgs
+, ...
+}:
 let
   gitConfig = {
     core = {
@@ -50,60 +52,37 @@ in
     tig # diff and commit view
   ];
 
-  programs.git =
-    {
-      enable = true;
-      aliases = {
-        amend = "commit --amend -m";
-        fixup = "!f(){ git reset --soft HEAD~\${1} && git commit --amend -C HEAD; };f";
-        loc = "!f(){ git ls-files | ${rg} \"\\.\${1}\" | xargs wc -l; };f"; # lines of code
-        staash = "stash --all";
-        graph = "log --decorate --oneline --graph";
-        br = "branch";
-        co = "checkout";
-        st = "status";
-        ls = "log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate";
-        ll = "log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate --numstat";
-        cm = "commit -m";
-        ca = "commit -am";
-        dc = "diff --cached";
-      };
-      extraConfig = gitConfig;
-      ignores = [
-        "*.bloop"
-        "*.bsp"
-        "*.metals"
-        "*.metals.sbt"
-        "*metals.sbt"
-        "*.direnv"
-        "*.envrc" # there is lorri, nix-direnv & simple direnv; let people decide
-        "*hie.yaml" # ghcide files
-        "*.mill-version" # used by metals
-        "*.jvmopts" # should be local to every project
-      ];
-      userEmail = "idar.evensen@gmail.com";
-      userName = "ievensen";
-
-      includes = [
-        {
-          condition = "gitdir:~/Projects/workspace/";
-          contents = {
-            user = {
-              name = "Idar Evensen";
-              email = "Idar.Evensen@hnikt.no";
-            };
-          };
-        }
-        {
-          condition = "hasconfig:remote.*.url:ssh://git@github.com:HNIKT-Tjenesteutvikling-Systemutvikling/**";
-          contents = {
-            user = {
-              name = "Idar Evensen";
-              email = "idar.evensen@hnikt.no";
-            };
-          };
-        }
-      ];
-    }
-    // (pkgs.sxm.git or { });
+  programs.git = {
+    enable = true;
+    aliases = {
+      amend = "commit --amend -m";
+      fixup = "!f(){ git reset --soft HEAD~\${1} && git commit --amend -C HEAD; };f";
+      loc = "!f(){ git ls-files | ${rg} \"\\.\${1}\" | xargs wc -l; };f"; # lines of code
+      staash = "stash --all";
+      graph = "log --decorate --oneline --graph";
+      br = "branch";
+      co = "checkout";
+      st = "status";
+      ls = "log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate";
+      ll = "log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate --numstat";
+      cm = "commit -m";
+      ca = "commit -am";
+      dc = "diff --cached";
+    };
+    extraConfig = gitConfig;
+    ignores = [
+      "*.bloop"
+      "*.bsp"
+      "*.metals"
+      "*.metals.sbt"
+      "*metals.sbt"
+      "*.direnv"
+      "*.envrc" # there is lorri, nix-direnv & simple direnv; let people decide
+      "*hie.yaml" # ghcide files
+      "*.mill-version" # used by metals
+      "*.jvmopts" # should be local to every project
+    ];
+    userEmail = "idar.evensen@gmail.com";
+    userName = "ievensen";
+  } // (pkgs.sxm.git or { });
 }

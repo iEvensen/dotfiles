@@ -7,37 +7,26 @@
   users.users = {
     ievensen = {
       isNormalUser = true;
-      initialHashedPassword = "";
+      initialHashedPassword = "$7$CU..../....re.hRJT/dAI5QtAnjQ2or/$nY1JgY1nvyNKZKGsFHnpCJUs9ABZEP5HqbQs04Vqmx4";
       openssh.authorizedKeys.keys = [
-        # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
-      extraGroups = [ "wheel" "networkmanager" "docker" "video" "audio" "plugdev" ];
+      extraGroups = [
+        "wheel"
+        "video"
+        "audio"
+        "plugdev"
+      ];
     };
   };
 
-  environment.persistence."/persist" = {
-    directories = [
-      "/var/lib/bluetooth"
-    ];
+  # Modules loaded
+  system = {
+    disks.extraStoreDisk.enable = false;
+    bluetooth.enable = true;
   };
 
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-    settings = {
-      General = {
-        Name = "Computer";
-        ControllerMode = "dual";
-        FastConnectable = "true";
-        Experimental = "true";
-      };
-      Policy = { AutoEnable = "true"; };
-      LE = { EnableAdvMonInterleaveScan = "true"; };
-    };
-  };
-
-  services = {
-    libinput.enable = true;
+  service = {
     blueman.enable = true;
+    touchpad.enable = true;
   };
 }

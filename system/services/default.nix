@@ -1,12 +1,16 @@
 {
   imports = [
+    ./blueman.nix
     ./btrbk.nix
-    ./dbus.nix
     ./gnome.nix
+    ./greetd.nix
     ./impermanence.nix
+    ./k3s.nix
     ./nfc.nix
     ./openssh.nix
     ./pipwire.nix
-    ./sops.nix
+    ./runner.nix
+    ./touchpad.nix
+    ./wally.nix
   ];
 }
