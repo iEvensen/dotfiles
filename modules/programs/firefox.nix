@@ -11,7 +11,7 @@
 
   home.persistence."/persist/${config.home.homeDirectory}" = {
     directories = [
-      ".config/Mozilla" # TODO: fix skjiten
+      ".mozilla"
     ];
   };
 }
