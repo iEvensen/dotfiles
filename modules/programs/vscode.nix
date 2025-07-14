@@ -33,6 +33,8 @@ let
   # Create a PATH string for these tools
   vscodeOnlyPath = "${pkgs.lib.makeBinPath vscodeOnlyTools}";
 
+  wrappersPath = "/run/wrappers/bin";
+
   # Create a PATH string for system tools
   systemToolsPath = "/run/current-system/sw/bin";
 
@@ -302,7 +304,7 @@ in
     home.packages = [
       (pkgs.writeShellScriptBin "code-wrapped" ''
         # Add our specific tools to the front of the PATH but preserve the rest
-        export PATH="${vscodeOnlyPath}:${systemToolsPath}:${homeManagerPath}:$PATH"
+        export PATH="${vscodeOnlyPath}:${wrappersPath}:${systemToolsPath}:${homeManagerPath}:$PATH"
         exec ${pkgs.vscode.fhs}/bin/code "$@"
       '')
     ];
