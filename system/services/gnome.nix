@@ -22,13 +22,6 @@
           gnome-online-accounts.enable = true;
         };
       };
-      xdg.portal = {
-        enable = true;
-        extraPortals = with pkgs; [
-          xdg-desktop-portal-wlr
-          xdg-desktop-portal-gtk
-        ];
-      };
       programs.dconf.enable = true; # Needed to manages user settings
       systemd = {
         user.services.polkit-gnome-authentication-agent-1 = {
@@ -51,6 +44,14 @@
         xserver.enable = true;
         desktopManager.gnome.enable = true;
         displayManager.gdm.enable = true;
+      };
+      xdg.portal = {
+        enable = true;
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-wlr
+          xdg-desktop-portal-gtk
+          xdg-desktop-portal-gnome
+        ];
       };
       environment.gnome.excludePackages = with pkgs; [
         gnome-photos
