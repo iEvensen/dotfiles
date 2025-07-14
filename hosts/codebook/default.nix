@@ -15,6 +15,7 @@
         "video"
         "audio"
         "plugdev"
+        "pipewire"
       ];
     };
   };
