@@ -42,6 +42,7 @@ in
   ./discord.nix
   ./fish.nix
   ./fzf.nix
+  ./firefox.nix
   ./gimp.nix
   ./git.nix
   ./hyprlock.nix
