@@ -1,4 +1,17 @@
+{ pkgs, config, ... }:
 {
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+    package = pkgs.wrapFirefox pkgs.firefox-devedition-unwrapped {
+      extraPolicies = {
+        ExtensionSettings = { };
+      };
+    };
+  };
+
+  home.persistence."/persist/${config.home.homeDirectory}" = {
+    directories = [
+      ".config/Mozilla" # TODO: fix skjiten
+    ];
+  };
 }
-  

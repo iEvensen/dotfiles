@@ -2,14 +2,18 @@
 , pkgs
 , lib
 , ...
-}: {
+}:
+{
   config = lib.mkMerge [
     (lib.mkIf config.environment.desktop.enable {
       services = {
         dbus = {
           enable = true;
           implementation = "broker";
-          packages = [ pkgs.gnome-keyring pkgs.gcr ];
+          packages = [
+            pkgs.gnome-keyring
+            pkgs.gcr
+          ];
         };
         gnome = {
           evolution-data-server.enable = true;
@@ -17,6 +21,13 @@
           gnome-keyring.enable = true;
           gnome-online-accounts.enable = true;
         };
+      };
+      xdg.portal = {
+        enable = true;
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-wlr
+          xdg-desktop-portal-gtk
+        ];
       };
       programs.dconf.enable = true; # Needed to manages user settings
       systemd = {
