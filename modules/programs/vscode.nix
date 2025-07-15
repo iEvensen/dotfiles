@@ -132,6 +132,7 @@ in
           "editor.minimap.enabled" = false;
           "editor.defaultFormatter" = "esbenp.prettier-vscode";
           "editor.lineNumbers" = "relative";
+          "terminal.integrated.defaultProfile.linux" = "fish";
 
           # Code lens for better navigation
           "java.referencesCodeLens.enabled" = true;
@@ -208,7 +209,8 @@ in
           "java.configuration.runtimes" = [ ];
           "java.import.gradle.java.home" = null;
           "java.import.maven.java.home" = null;
-          "java.format.settings.url" = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml";
+          "java.format.settings.url" =
+            "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml";
           "java.format.settings.profile" = "GoogleStyle";
 
           # Docker
@@ -323,8 +325,16 @@ in
       exec = "code-wrapped %F";
       icon = "code";
       startupNotify = true;
-      categories = [ "Utility" "TextEditor" "Development" "IDE" ];
-      mimeType = [ "text/plain" "inode/directory" ];
+      categories = [
+        "Utility"
+        "TextEditor"
+        "Development"
+        "IDE"
+      ];
+      mimeType = [
+        "text/plain"
+        "inode/directory"
+      ];
       actions = {
         new-empty-window = {
           exec = "code-wrapped --new-window %F";
