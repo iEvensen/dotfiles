@@ -53,6 +53,9 @@ in
           github.copilot
           github.copilot-chat
 
+          # Github Actions
+          github.vscode-github-actions
+
           # Editor
           editorconfig.editorconfig
           ms-azuretools.vscode-docker
@@ -61,6 +64,7 @@ in
           ms-vscode-remote.remote-containers
           ms-vscode.makefile-tools
           mkhl.direnv
+          # vscodevim.vim
           bmalehorn.vscode-fish
 
           # Formatters
