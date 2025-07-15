@@ -39,11 +39,11 @@ in
           sources = [
             (lib.hm.gvariant.mkTuple [
               "xkb"
-              "us"
+              "no"
             ])
             (lib.hm.gvariant.mkTuple [
               "xkb"
-              "no"
+              "us"
             ])
           ];
         };
@@ -124,18 +124,18 @@ in
           window-preview-fixed-y = true;
           preview-custom-opacity = 73;
           window-preview-size = 127;
-          appicon-padding = 5;
-          appicon-margin = 3;
+          appicon-padding = 3;
+          appicon-margin = 2;
           show-tooltip = false;
           show-showdesktop-hover = true;
           dot-style-unfocused = "DOTS";
           dot-style-focused = "DOTS";
           trans-use-custom-opacity = true;
           trans-panel-opacity = "0.55";
-          tray-size = 19;
-          leftbox-size = 21;
+          tray-size = 15;
+          leftbox-size = 17;
           panel-element-positions = ''{"AUS-0x0000bec6":[{"element":"showAppsButton","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"centered"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}'';
-          panel-sizes = "{\"0\":64}";
+          panel-sizes = "{\"0\":46}";
           panel-positions = "{\"0\":\"BOTTOM\"}";
           showdesktop-button-width = "5";
           show-apps-icon-file = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake-white.svg";
