@@ -7,6 +7,9 @@
 let
   inherit (osConfig.environment) desktop;
 
+  # Import shared aliases
+  sharedAliases = import ./fish-aliases.nix { inherit pkgs lib; };
+
   # VS Code only tools
   vscodeOnlyTools = with pkgs; [
     # Language servers and formatters
@@ -26,8 +29,19 @@ let
     typescript-language-server
     vue-language-server
 
+    # Fonts for proper icon rendering
+    nerd-fonts.roboto-mono
+
     # Utilities
     jq
+
+    # Tools needed for aliases
+    bat
+    eza
+    ncdu
+    prettyping
+    mimeo
+    docker-compose
   ];
 
   # Create a PATH string for these tools
@@ -133,6 +147,17 @@ in
           "editor.defaultFormatter" = "esbenp.prettier-vscode";
           "editor.lineNumbers" = "relative";
           "terminal.integrated.defaultProfile.linux" = "fish";
+
+          # Terminal font configuration for nerd icons
+          "terminal.integrated.fontFamily" = "RobotoMono Nerd Font, 'RobotoMono Nerd Font Mono', monospace";
+          "terminal.integrated.fontSize" = 14;
+
+          # Fish shell configuration for VS Code
+          "terminal.integrated.env.linux" = {
+            "TERM_PROGRAM" = "vscode";
+          };
+          "terminal.integrated.shellIntegration.enabled" = true;
+          "terminal.integrated.shellIntegration.showWelcome" = false;
 
           # Code lens for better navigation
           "java.referencesCodeLens.enabled" = true;
@@ -315,13 +340,20 @@ in
     ];
 
     programs = {
-      fish.shellAliases = {
+      fish.shellAliases = sharedAliases.fishAliases // {
+        # VS Code specific alias
         code = "code-wrapped";
       };
 
       fish.interactiveShellInit = ''
         if test "$TERM_PROGRAM" = "vscode"
           set -gx PATH "${vscodeOnlyPath}:${wrappersPath}:${systemToolsPath}:${homeManagerPath}" $PATH
+          
+          # Ensure fish functions and aliases are available in VS Code terminal
+          # Source the system fish configuration if it exists
+          if test -f /etc/fish/config.fish
+            source /etc/fish/config.fish
+          end
         end
       '';
     };

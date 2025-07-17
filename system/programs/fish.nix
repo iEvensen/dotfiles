@@ -23,7 +23,8 @@ let
     + fzfConfig
     + themeConfig;
 
-  dc = "${pkgs.docker-compose}/bin/docker-compose";
+  # Import shared aliases
+  sharedAliases = import ../modules/programs/fish-aliases.nix { inherit pkgs lib; };
 in
 {
   programs.fish = {
@@ -38,39 +39,7 @@ in
       jump shell fish | source
       any-nix-shell fish --info-right | source
     '';
-    shellAliases = {
-      inherit dc;
-      cat = "bat";
-      dps = "${dc} ps";
-      dcd = "${dc} down --remove-orphans";
-      drm = "docker images -a -q | xargs docker rmi -f";
-      du = "${pkgs.ncdu}/bin/ncdu --color dark -rr -x";
-      ls = "${pkgs.eza}/bin/eza";
-      la = "${lib.getExe pkgs.eza} --long --all --group --header --group-directories-first --sort=type --icons";
-      lg = "${lib.getExe pkgs.eza} --long --all --group --header --git";
-      lt = "${lib.getExe pkgs.eza} --long --all --group --header --tree --level ";
-
-      ".." = "cd ..";
-
-      ping = "${pkgs.prettyping}/bin/prettyping";
-      tree = "${pkgs.eza}/bin/eza -T";
-      xdg-open = "${pkgs.mimeo}/bin/mimeo";
-
-      # Nix
-      nixgc = "nix-collect-garbage";
-      nixgcd = "sudo nix-collect-garbage -d";
-
-      # Locations
-      dot = "cd ~/Sources/dotfiles";
-      doc = "cd ~/Documents";
-      neovim = "cd ~/Projects/neovim";
-      work = "cd ~/Projects/workspace";
-      www = "cd ~/Projects/wwwsite/";
-
-      update = "nix flake update";
-      supdate = "sudo nix flake update";
-      upgrade = "sudo nixos-rebuild switch --flake";
-    };
+    shellAliases = sharedAliases.fishAliases;
     shellInit = fishConfig;
   };
 }
