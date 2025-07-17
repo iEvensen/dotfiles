@@ -3,7 +3,6 @@ let
   dc = "${pkgs.docker-compose}/bin/docker-compose";
 in
 {
-  # Shared fish aliases used by both system and home-manager configurations
   fishAliases = {
     inherit dc;
 

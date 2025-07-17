@@ -1,14 +1,14 @@
-{ osConfig
-, config
-, lib
-, pkgs
-, ...
+{
+  osConfig,
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   inherit (osConfig.environment) desktop;
 
-  # Import shared aliases
-  sharedAliases = import ./fish-aliases.nix { inherit pkgs lib; };
+  sharedAliases = import ../../system/programs/fish/fish-aliases.nix { inherit pkgs lib; };
 
   # VS Code only tools
   vscodeOnlyTools = with pkgs; [
@@ -341,16 +341,12 @@ in
 
     programs = {
       fish.shellAliases = sharedAliases.fishAliases // {
-        # VS Code specific alias
         code = "code-wrapped";
       };
 
       fish.interactiveShellInit = ''
         if test "$TERM_PROGRAM" = "vscode"
           set -gx PATH "${vscodeOnlyPath}:${wrappersPath}:${systemToolsPath}:${homeManagerPath}" $PATH
-          
-          # Ensure fish functions and aliases are available in VS Code terminal
-          # Source the system fish configuration if it exists
           if test -f /etc/fish/config.fish
             source /etc/fish/config.fish
           end

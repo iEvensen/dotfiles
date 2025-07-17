@@ -1,5 +1,6 @@
-{ pkgs
-, ...
+{
+  pkgs,
+  ...
 }:
 {
   # Core pakages for system
@@ -60,8 +61,8 @@
 
   imports = [
     # ./cachix
+    ./fish
     ./docker.nix
-    ./fish.nix
     ./fonts.nix
     ./qemu.nix
     ./steam.nix
