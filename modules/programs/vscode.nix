@@ -314,8 +314,16 @@ in
       '')
     ];
 
-    programs.fish.shellAliases = {
-      code = "code-wrapped";
+    programs = {
+      fish.shellAliases = {
+        code = "code-wrapped";
+      };
+
+      fish.interactiveShellInit = ''
+        if test "$TERM_PROGRAM" = "vscode"
+          set -gx PATH "${vscodeOnlyPath}:${wrappersPath}:${systemToolsPath}:${homeManagerPath}" $PATH
+        end
+      '';
     };
 
     xdg.desktopEntries."code" = {
