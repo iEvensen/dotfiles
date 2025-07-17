@@ -24,7 +24,7 @@ let
     + themeConfig;
 
   # Import shared aliases
-  sharedAliases = import ../modules/programs/fish-aliases.nix { inherit pkgs lib; };
+  sharedAliases = import ../../modules/programs/fish-aliases.nix { inherit pkgs lib; };
 in
 {
   programs.fish = {
