@@ -23,8 +23,7 @@ let
     + fzfConfig
     + themeConfig;
 
-  # Import shared aliases
-  sharedAliases = import ../../modules/programs/fish-aliases.nix { inherit pkgs lib; };
+  sharedAliases = import ./fish-aliases.nix { inherit pkgs lib; };
 in
 {
   programs.fish = {

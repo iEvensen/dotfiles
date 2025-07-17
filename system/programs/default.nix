@@ -60,8 +60,8 @@
 
   imports = [
     # ./cachix
+    ./fish
     ./docker.nix
-    ./fish.nix
     ./fonts.nix
     ./qemu.nix
     ./steam.nix
