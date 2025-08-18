@@ -4,19 +4,24 @@
 , ...
 }:
 let
-  cfg = config.program.k3s;
+  cfg = config.service.k3s;
 in
 {
-  options.program.k3s = {
+  options.service.k3s = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      default = false;
+      default = true;
       description = "Enable Kubernetes k3s service.";
     };
   };
 
-  config = lib.mkIf (cfg.enable && config.environment.desktop.enable) {
-    environment.systemPackages = [ pkgs.k3s ];
+  config = lib.mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      k3s
+      kubectl
+      kubernetes-helm
+      k9s
+    ];
 
     networking.firewall = {
       allowedTCPPorts = [
@@ -38,6 +43,9 @@ in
       extraFlags = toString [
         "--write-kubeconfig-mode 644"
         "--node-name k3s-master-01"
+        "--cluster-cidr 10.42.0.0/16"
+        "--service-cidr 10.43.0.0/16"
+        "--cluster-dns 10.43.0.10"
       ];
     };
   };
