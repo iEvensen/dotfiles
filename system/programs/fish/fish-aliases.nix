@@ -25,6 +25,18 @@ in
     dcd = "${dc} down --remove-orphans";
     drm = "docker images -a -q | xargs docker rmi -f";
 
+    # Git
+    gs = "git status";
+
+    # Kubernetes
+    k = "kubectl";
+    kget = "kubectl get";
+    kdesc = "kubectl describe";
+    klogs = "kubectl logs";
+    kexec = "kubectl exec -it";
+    kapply = "kubectl apply -f";
+    kdel = "kubectl delete";
+
     # Nix
     nixgc = "nix-collect-garbage";
     nixgcd = "sudo nix-collect-garbage -d";
